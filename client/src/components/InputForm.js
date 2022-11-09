@@ -8,6 +8,7 @@ function InputForm({
   setValue,
   invalidFields,
   setInvalidFields,
+  auto,
 }) {
   return (
     <>
@@ -21,8 +22,9 @@ function InputForm({
           setValue((prev) => ({ ...prev, [keyPayload]: e.target.value }))
         }
         onFocus={() => setInvalidFields([])}
+        autoComplete={auto ? "true" : "false"}
       />
-      {invalidFields.length > 0 &&
+      {invalidFields?.length > 0 &&
         invalidFields.some((i) => i.name === keyPayload) && (
           <small className="text-red-400 italic">
             {invalidFields.find((i) => i.name === keyPayload)?.message}

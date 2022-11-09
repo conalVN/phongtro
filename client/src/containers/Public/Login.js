@@ -1,9 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { Button, InputForm } from "../../components";
 import * as actions from "../../store/actions";
+import validate from "../../ultils/Common/validate";
 
 function Login() {
   const location = useLocation();
@@ -24,7 +26,6 @@ function Login() {
 
   useEffect(() => {
     isLogin && navigate("/");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLogin]);
 
   useEffect(() => {
@@ -39,64 +40,12 @@ function Login() {
           phone: payload.phone,
           password: payload.password,
         };
-    let invalids = validate(finalPayload);
+    let invalids = validate(finalPayload, setInvalidFields);
     if (invalids === 0) {
       isRegister
         ? dispatch(actions.register(payload))
         : dispatch(actions.login(payload));
     }
-  };
-
-  const validate = (payload) => {
-    let invalids = 0;
-    let fields = Object.entries(payload);
-    // check input # " "
-    fields.forEach((item) => {
-      if (item[1] === "") {
-        setInvalidFields((prev) => [
-          ...prev,
-          {
-            name: item[0],
-            message: "Bạn không được để trống trường này!",
-          },
-        ]);
-        invalids++;
-      }
-    });
-
-    fields.forEach((item) => {
-      switch (item[0]) {
-        // err length password < 6 chart
-        case "password":
-          if (item[1].length < 6) {
-            setInvalidFields((prev) => [
-              ...prev,
-              {
-                name: item[0],
-                message: "Mật khẩu phải tối thiểu 6 kí tự",
-              },
-            ]);
-            invalids++;
-          }
-          break;
-        // check type phone number
-        case "phone":
-          if (!+item[1]) {
-            setInvalidFields((prev) => [
-              ...prev,
-              {
-                name: item[0],
-                message: "Số điện thoại không hợp lệ",
-              },
-            ]);
-            invalids++;
-          }
-          break;
-        default:
-          break;
-      }
-    });
-    return invalids;
   };
 
   return (
@@ -134,6 +83,7 @@ function Login() {
           keyPayload="password"
           value={payload.password}
           setValue={setPayload}
+          auto
         />
         <Button
           text={isRegister ? "Đăng kí" : "Đăng nhập"}

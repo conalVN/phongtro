@@ -20,7 +20,7 @@ const generateCode = (value) => {
   }
 
   for (let i = 0; i < length - 1; i++) {}
-  return `${value.charAt(0)}${output}`.toUpperCase();
+  return `${value.charAt(2)}${output}`.toUpperCase();
 };
 
 export default generateCode;

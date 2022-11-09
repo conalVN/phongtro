@@ -1,24 +1,33 @@
-import { useCallback } from "react";
-import { useNavigate, Link } from "react-router-dom";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useCallback, useEffect, useRef, useState } from "react";
+import { useNavigate, Link, useSearchParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import Button from "../../components/Button";
+import { Button, User } from "../../components";
 import logo from "../../assets/logo-phongtro.svg";
 import icons from "../../ultils/icons";
 import { path } from "../../ultils/constant";
+import manageAccount from "../../ultils/manageAccount";
 import * as actions from "../../store/actions";
 
-const { AiOutlinePlusCircle } = icons;
+const { AiOutlinePlusCircle, BsChevronDown, AiOutlineLogout } = icons;
 
 function Header() {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const headerRef = useRef();
   const { isLogin } = useSelector((state) => state.auth);
+  const [isShowMenu, setIsShowMenu] = useState(false);
   const goLogin = useCallback((flag) => {
     navigate(path.LOGIN, { state: { flag } });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    headerRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [searchParams.get("page")]);
+
   return (
-    <div className="w-1100">
+    <div ref={headerRef} className="w-1100">
       <div className="w-full flex items-center justify-between">
         <Link to="/">
           <img
@@ -35,25 +44,59 @@ function Header() {
                 text="Đăng nhập"
                 textColor="text-white"
                 bgColor="bg-[#3961fb]"
-                onClick={() => goLogin(false)}
+                onClick={() => {
+                  goLogin(false);
+                }}
               />
               <Button
                 text="Đăng kí"
                 textColor="text-white"
                 bgColor="bg-[#3961fb]"
-                onClick={() => goLogin(true)}
+                onClick={() => {
+                  goLogin(true);
+                }}
               />
             </div>
           )}
           {isLogin && (
-            <div className="flex items-center gap-1">
-              <small>Phòng trọ Conal 'Name'!</small>
+            <div className="relative flex items-center gap-1">
+              <User />
               <Button
-                text="Đăng xuất"
+                text="Quản lí tài khoản"
                 textColor="text-white"
                 bgColor="bg-red-600"
-                onClick={() => dispatch(actions.logout())}
+                IcAfter={BsChevronDown}
+                onClick={() => {
+                  setIsShowMenu(!isShowMenu);
+                }}
               />
+              {isShowMenu && (
+                <section className="absolute top-[100%] right-0 min-w-200 bg-white p-4 rounded-md shadow-sm flex flex-col">
+                  {manageAccount.map((item) => {
+                    return (
+                      <Link
+                        to={item.path}
+                        key={item.id}
+                        className="w-full flex items-center gap-2 text-blue-500 p-2 border-b border-gray-200 hover:text-orange-400"
+                      >
+                        {item?.icon}
+                        {item.text}
+                      </Link>
+                    );
+                  })}
+                  <button
+                    to="/logout"
+                    className="w-full flex items-center gap-2 text-blue-500 text-start p-2 hover:text-orange-400"
+                    onClick={() => {
+                      dispatch(actions.logout());
+                      setIsShowMenu(false);
+                    }}
+                  >
+                    <AiOutlineLogout />
+                    Đăng xuất
+                  </button>
+                </section>
+              )}
             </div>
           )}
           <Button
@@ -61,6 +104,7 @@ function Header() {
             textColor="text-white"
             bgColor="bg-secondary2"
             IcAfter={AiOutlinePlusCircle}
+            onClick={() => navigate("he-thong/tao-bai-dang")}
           />
         </div>
       </div>

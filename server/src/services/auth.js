@@ -4,8 +4,7 @@ import jwt from "jsonwebtoken";
 import { v4 } from "uuid";
 require("dotenv").config();
 
-const hashPassword = (password) =>
-  bcrypt.hashSync(password, bcrypt.genSaltSync(12));
+const hashPassword = (password) => bcrypt.hashSync(password, bcrypt.genSaltSync(12));
 
 export const registerService = ({ phone, name, password }) =>
   new Promise(async (resolve, reject) => {
@@ -28,9 +27,7 @@ export const registerService = ({ phone, name, password }) =>
         );
       resolve({
         err: token ? 0 : 2,
-        msg: token
-          ? "Register is success"
-          : "Phone number has been already used !",
+        msg: token ? "Register is success" : "Phone number has been already used !",
         token: token || null,
       });
     } catch (error) {
@@ -45,8 +42,7 @@ export const loginService = ({ phone, password }) =>
         where: { phone },
         raw: true,
       });
-      const isCorrectPassword =
-        response && bcrypt.compareSync(password, response.password);
+      const isCorrectPassword = response && bcrypt.compareSync(password, response.password);
       const token =
         isCorrectPassword &&
         jwt.sign(

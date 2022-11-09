@@ -1,6 +1,35 @@
-import { Button, Item } from "../../components";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useSearchParams } from "react-router-dom";
 
-function List() {
+import { Button, Item } from "../../components";
+import { getPostsLimit } from "../../store/actions/post";
+
+function List({ categoryCode }) {
+  const [sort, setSort] = useState(0);
+  const dispatch = useDispatch();
+  const [searchParams] = useSearchParams();
+  const { posts } = useSelector((state) => state.post);
+
+  useEffect(() => {
+    let params = [];
+    for (let entry of searchParams.entries()) {
+      params.push(entry);
+    }
+    let searchParamsObj = {};
+    params?.forEach((i) => {
+      if (Object.keys(searchParamsObj)?.some((item) => item === i[0])) {
+        searchParamsObj[i[0]] = [...searchParamsObj[i[0]], i[1]];
+      } else {
+        searchParamsObj = { ...searchParamsObj, [i[0]]: [i[1]] };
+      }
+    });
+    if (categoryCode) searchParamsObj.categoryCode = categoryCode;
+    if (sort === 1) searchParamsObj.order = ["createdAt", "DESC"];
+    dispatch(getPostsLimit(searchParamsObj));
+  }, [searchParams, categoryCode, sort]);
+
   return (
     <div className="w-full p-2 bg-white shadow-md rounded-md">
       <div className="flex items-center justify-between my-3">
@@ -9,12 +38,40 @@ function List() {
       </div>
       <div className="flex items-center gap-2 my-2">
         <span>Sắp xếp</span>
-        <Button text="Mặc định" bgColor="bg-gray-200" />
-        <Button text="Mới nhất" bgColor="bg-gray-200" />
-        <Button text="Có video" bgColor="bg-gray-200" />
+        <span
+          onClick={() => setSort(0)}
+          className={`bg-gray-200 p-2 cursor-pointer hover:underline ${
+            sort === 0 && "text-red-500"
+          }`}
+        >
+          Mặc định
+        </span>
+        <span
+          onClick={() => setSort(1)}
+          className={`bg-gray-200 p-2 cursor-pointer hover:underline ${
+            sort === 1 && "text-red-500"
+          }`}
+        >
+          Mới nhất
+        </span>
       </div>
       <div className="items">
-        <Item />
+        {posts?.length > 0 &&
+          posts.map((item) => {
+            return (
+              <Item
+                key={item?.id}
+                address={item?.address}
+                attributes={item?.attributes}
+                description={JSON.parse(item?.description)}
+                images={JSON.parse(item?.images?.image)}
+                star={+item?.star}
+                title={item?.title}
+                user={item?.user}
+                id={item?.id}
+              />
+            );
+          })}
       </div>
     </div>
   );

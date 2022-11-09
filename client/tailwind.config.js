@@ -13,11 +13,19 @@ module.exports = {
         "overlay-70": "rgba(0, 0, 0 , 0.7)",
       },
       maxWidth: {
+        150: "150px",
+        500: "500px",
         600: "600px",
         1100: "1100px",
       },
+      minWidth: {
+        200: "200px",
+      },
       cursor: {
         ponter: "ponter",
+      },
+      flex: {
+        3: "3 3 0%",
       },
     },
   },

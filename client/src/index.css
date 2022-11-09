@@ -6,3 +6,74 @@
     display: inline-block !important;
     margin-bottom: 6px;
 }
+input[type="range"]::-webkit-slider-runnable-track {
+    -webkit-appearance: none;
+    height: 5px;
+}
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    background-color: white;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    margin-top: -.5rem;
+    pointer-events: auto;
+    cursor: pointer;
+}
+input[type="range"]::-webkit-slider-thumb:active {
+    box-shadow: rgba(4, 255, 251, 0.25) 0px 2px 5px -1px, rgba(3, 15, 251, 0.3) 0px 1px 3px -1px;
+}
+input[type="range"]::-moz-range-track {
+    -moz-appearance: none;
+    height: 5px;
+}
+input[type="range"]::-moz-range-thumb {
+    -moz-appearance: none;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    background-color: white;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    margin-top: -.5rem;
+    pointer-events: auto;
+    cursor: pointer;
+}
+input[type="range"]::-moz-range-thumb:active {
+    box-shadow: rgba(4, 255, 251, 0.25) 0px 2px 5px -1px, rgba(3, 15, 251, 0.3) 0px 1px 3px -1px;
+}
+
+input[type="range"]::-ms-track {
+    appearance: none;
+    height: 5px
+}
+input[type="range"]::-ms-thumb {
+    appearance: none;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    background-color: white;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    margin-top: -.5rem;
+    pointer-events: auto;
+    cursor: pointer;
+}
+input[type="range"]::-ms-thumb:active {
+    box-shadow: rgba(4, 255, 251, 0.25) 0px 2px 5px -1px, rgba(3, 15, 251, 0.3) 0px 1px 3px -1px;
+}
+
+button.slick-next::before,
+button.slick-prev::before {
+    top: 45% !important;
+    font-size: 40px;
+    color: yellow !important;
+
+}
+
+button.slick-next {
+    right: 28px !important;
+}
+button.slick-prev {
+    left: 10px !important;
+    z-index: 10;
+}

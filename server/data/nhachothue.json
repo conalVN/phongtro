@@ -215,50 +215,6 @@
       }
     },
     {
-      "images": [],
-      "header": {
-        "title": "Cho thue nha sieu dep sieu xin",
-        "class": {
-          "content": "Chuyên mục: Cho thuê nhà Quận 1",
-          "classType": "Cho thuê nhà Quận 1"
-        },
-        "address": "Địa chỉ: 12 Đường Alexandre, Phường Đa Kao, Quận 1, Hồ Chí Minh",
-        "attributes": {
-          "price": "Thỏa thuận",
-          "acreage": "0m2",
-          "published": "1 ngày trước",
-          "hashtag": "609382"
-        }
-      },
-      "mainContent": {
-        "header": "Thông tin mô tả",
-        "content": [
-          "Heheasdasdaddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
-        ]
-      },
-      "overview": {
-        "header": "Đặc điểm tin đăng",
-        "content": [
-          { "name": "Mã tin:", "content": "#609382" },
-          { "name": "Khu vực", "content": "Cho thuê nhà Hồ Chí Minh" },
-          { "name": "Loại tin rao:", "content": "Nhà thuê nguyên căn" },
-          { "name": "Đối tượng thuê:", "content": "Tất cả" },
-          { "name": "Gói tin:", "content": "Tin miễn phí" },
-          { "name": "Ngày đăng:", "content": "Thứ 3, 21:38 25/10/2022" },
-          { "name": "Ngày hết hạn:", "content": "Chủ Nhật, 21:38 30/10/2022" }
-        ]
-      },
-      "contact": {
-        "header": "Thông tin liên hệ",
-        "content": [
-          { "name": "Liên hệ:", "content": "~" },
-          { "name": "Điện thoại:", "content": "0964241701" },
-          { "name": "Zalo", "content": "/" },
-          { "name": "Facebook", "content": "/" }
-        ]
-      }
-    },
-    {
       "images": [
         "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/2022/10/25/img-3167_1666689381.jpg",
         "https://pt123.cdn.static123.com/images/thumbs/900x600/fit/undefined",
