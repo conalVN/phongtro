@@ -18,7 +18,7 @@ app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 
 initRoutes(app);
-app.use("", (req, res) => {
+app.get("", (req, res) => {
   res.json("server on");
 });
 connectDatabase();
