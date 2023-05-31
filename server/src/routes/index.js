@@ -16,6 +16,9 @@ const initRoutes = (app) => {
   app.use("/api/v1/area", areaRouter);
   app.use("/api/v1/province", provinceRouter);
   app.use("/api/v1/user", userRouter);
+  app.use("", (req, res) => {
+    res.json("server on");
+  });
 
   return app.use("/", (req, res) => {
     res.send("router run . . .");
